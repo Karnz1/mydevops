@@ -1,0 +1,5 @@
+list volumes:
+docker volume ls
+
+create named volume:
+docker volume create <volume name>
