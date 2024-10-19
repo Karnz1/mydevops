@@ -1,0 +1,5 @@
+remove current remote linked with github and link a new local repository to github repo.
+
+git remote remove origin
+git remote add origin example-github.com/link_to_repository
+git push --set-upstream origin main
