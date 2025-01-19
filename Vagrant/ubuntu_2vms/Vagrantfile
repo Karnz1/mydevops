@@ -1,0 +1,23 @@
+machines = [
+  {name: "client", memory: 2048, cpus: 2, ip: "192.168.56.100", ssh_port: 2222},
+  {name: "server", memory: 2048, cpus: 2, ip: "192.168.56.101", ssh_port: 2223}
+]
+
+
+Vagrant.configure("2") do |config|
+  machines.each do |machine|
+    config.vm.define machine[:name] do |vm_config|
+      vm_config.vm.box = "ubuntu/bionic64"
+      vm_config.vm.hostname = "#{machine[:name]}.local"
+      vm_config.vm.network "private_network", ip: machine[:ip]
+      vm_config.vm.network "forwarded_port", guest: 22, host: machine[:ssh_port], id: "#{machine[:name]}-ssh"
+      vm_config.vm.provider "virtualbox" do |vb|
+        vb.gui = false
+        vb.memory = machine[:memory]
+        vb.cpus = machine[:cpus]
+        vb.customize ["modifyvm", :id, "--autostart-enabled", "off"]
+      end
+    end
+  end
+end
+
