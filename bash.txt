@@ -1,0 +1,21 @@
+echo *      # prints a list of files
+set -f      # disable filename expansion
+echo *      # prints a literal asterisk
+set +f      # enable filename expansion
+
+
+Controlling Filename Expansion
+There are several settings for the builtin shopt command that control how filename expansion operates. A couple of interesting ones are:
+
+shopt -s nocaseglob -- perform case insensitive matching
+shopt -s extglob -- enable extended patterns
+shopt -s nullglob -- if no files match, replace the pattern with nothing. The default behaviour is to leave the pattern in place as a literal string.
+
+
+Some important parameters used by or set by bash include:
+
+PATH -- a colon-separated list of directories used to find external commands.
+IFS -- the "internal field separator". We'll see how it's used below.
+PWD -- your current working directory. It will be the same value as the output of the pwd command.
+RANDOM -- a pseudo-random integer between 0 and 32767.
+BASH_VERSION -- the version string of the running instance of bash.
